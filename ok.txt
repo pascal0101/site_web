@@ -1,0 +1,7 @@
+[16:34, 07/02/2020] Golo: MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+[16:40, 07/02/2020] Golo: {% if client.photoClient %}
+                                <img src="{{ client.photoClient.url }}" alt="">
+                            {% else %}
+                                <img src="{% static 'Web/img/profile/client.png' %}" alt="">
+                            {% endif %}
