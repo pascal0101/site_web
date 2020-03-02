@@ -338,7 +338,7 @@
           <div class="col-sm-12">
             <div class="title-box text-center">
               <h3 class="title-a">
-                Blog
+                les différentes galeries
               </h3>
               <p class="subtitle-a">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -352,7 +352,7 @@
           <div class="col-md-4">
             <div class="card card-blog">
               <div class="card-img">
-                <a href="blog-single.html"><img src="{{ galerie.image_set.first.image_path.url }}" alt="" class="img-fluid"></a>
+                <a href="/mysite1/detail/{{galerie.id}}"><img src="{{ galerie.image_set.first.image_path.url }}" alt="" class="img-fluid"></a>
               </div>
               <div class="card-body">
                 <div class="card-category-box">
@@ -360,20 +360,16 @@
                     <h6 class="category">{{ galerie.titre_gal }}</h6>
                   </div>
                 </div>
-                <h3 class="card-title"><a href="blog-single.html">{{ galerie.titre_gal }}</a></h3>
+                <h3 class="card-title"><a href="/mysite1/detail/{{galerie.id}}">{{ galerie.titre_gal }}</a></h3>
                 <p class="card-description">
                   {{ galerie.description_gal }}
                 </p>
               </div>
               <div class="card-footer">
-                <div class="post-author">
-                  <a href="#">
-                    <img src="{% static 'img/testimonial-2.jpg' %}" alt="" class="avatar rounded-circle">
-                    <span class="author">Morgan Freeman</span>
-                  </a>
-                </div>
+                
                 <div class="post-date">
-                  <span class="ion-ios-clock-outline"></span> 10 min
+                  <span class="ion-ios-clock-outline"></span> 
+                  <time datetime="{{galerie.created_at| date:'Y-m-d'}}">Posté il ya {{galerie.created_at|timesince}}</time>
                 </div>
               </div>
             </div>

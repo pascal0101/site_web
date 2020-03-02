@@ -1,29 +1,33 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
-class TimespamtedModel(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    class Meta:
-        abstract:True
-        
-class Post(models.Model):
-    title = models.CharField(max_length=255)
-    body = models.TextField()
 
-class Galerie(TimespamtedModel):
+class Galerie(models.Model):
     titre_gal = models.CharField(max_length=255)
     description_gal = models.TextField()
-
+    created_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
+    updated_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
     def __str__(self):
         return self.titre_gal
 
-class Image(TimespamtedModel):
+class Image(models.Model):
     titre_img = models.CharField(max_length=255)
     description_img = models.TextField()
     image_path = models.ImageField(upload_to='image',blank=True,null=True)
-    categorie = models.ForeignKey(Galerie, on_delete=models.CASCADE)
+    categorie = models.ForeignKey(Galerie, on_delete=models.CASCADE, blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
+    updated_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
 
     def __str__(self):
         return self.titre_img
+
+class Comment(models.Model):
+    nom = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    message = models.TextField()
+    gal = models.ForeignKey(Galerie,on_delete=models.CASCADE, blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
+    updated_at = models.DateTimeField(default=timezone.now,blank=True,null=True)
+    def __str__(self):
+        return self.nom
     

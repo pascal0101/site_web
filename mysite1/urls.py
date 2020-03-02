@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     path('acceuil/', views.getgalerie),
     path('about/', views.about),
+    path('detail/<int:id>', views.getdetail)
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

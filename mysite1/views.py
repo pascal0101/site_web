@@ -1,7 +1,6 @@
-from django.shortcuts import render
-from .models import Post 
-from .models import Galerie
-from .models import Image
+from django.shortcuts import get_object_or_404, render
+from .models import *
+from django.contrib import messages
 # Create your views here.
 def index(request):
     #posts = Post.objects.all()
@@ -20,6 +19,27 @@ def getgalerie(request):
     galeries = Galerie.objects.all()
     return render(request,'index.html',{'galeries':galeries})
 
+def getdetail(request,id):
+    galerie = get_object_or_404(Galerie, pk=id)
+    comments = Comment.objects.filter(gal_id=id)
+    cmt = Comment.objects.filter(gal_id=id).count()
+    print(cmt)
+    if request.method == 'POST':
+        nom_c = request.POST.get('nom')
+        email_c = request.POST.get('email')
+        message_c = request.POST.get('message')
+        gal_id = Galerie.objects.get(pk=id)
+        print("form is ok")
+        c = Comment(nom=nom_c,email= email_c,message= message_c,gal= gal_id)
+        c.save()
+        return render(request,'detail.html', {'galerie': galerie,'comments':comments,'cmt':cmt})
+        messages.success(request,'Commentaire posté avec succès')
+    else:
+        return render(request,'detail.html', {'galerie': galerie,'comments':comments,'cmt':cmt})
+    
+    
+    
+    
 def getimage(request):
     images = Image.objects.all()
     return render(request,'index.html',{'images':images})
