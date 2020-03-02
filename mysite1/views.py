@@ -17,7 +17,8 @@ def about(request):
 def getgalerie(request):
     #images = Image.objects.all()
     galeries = Galerie.objects.all()
-    return render(request,'index.html',{'galeries':galeries})
+    images = Image.objects.all()
+    return render(request,'index.html',{'galeries':galeries,'images':images})
 
 def getdetail(request,id):
     galerie = get_object_or_404(Galerie, pk=id)
@@ -32,8 +33,9 @@ def getdetail(request,id):
         print("form is ok")
         c = Comment(nom=nom_c,email= email_c,message= message_c,gal= gal_id)
         c.save()
+        messages.success(request,'Commentaire a été posté avec succès')
         return render(request,'detail.html', {'galerie': galerie,'comments':comments,'cmt':cmt})
-        messages.success(request,'Commentaire posté avec succès')
+       
     else:
         return render(request,'detail.html', {'galerie': galerie,'comments':comments,'cmt':cmt})
     

@@ -92,18 +92,18 @@
   <!--/ Intro Skew End /-->
 
   <!--/ Section Blog-Single Star /-->
-    {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} m-2" id="msg" role="alert">
-        {{ message }}
-      </div>
-      <div class="alert alert-success" role="alert">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</div>
-      {% endfor %}
-    {% endif %}
+    
   <section class="blog-wrapper sect-pt4" id="blog">
     <div class="container">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-success m-2" id="msg" role="alert">
+        <strong>Votre</strong> {{ message }} !
+      </div>
+      {% endfor %}
+      {% endif %}
+
+    
       <div class="row">
        
         <div class="col-md-8">
@@ -175,7 +175,7 @@
                   <img src="{% static 'img/testimonial-2.png' %}" alt="">
                 </div>
                 <div class="comment-details">
-                  <h4 class="comment-author">{{comment.nom}}</h4>
+                  <h4 class="comment-author">Par <strong style="color: green;">{{comment.nom}}</strong></h4>
       <time datetime="{{comment.created_at| date:'Y-m-d'}}">Posté il ya {{comment.created_at|timesince}}</time>
                   
                     <blockquote class="blockquote">
@@ -372,6 +372,11 @@
     $('#myCarousel').on('slide.bs.carousel', function () {
       // do something…
     })
+    setTimeout(function(){
+      if($('msg').length > 0){
+        $('#msg').remove();
+      }
+    },2000)
   </script>
 </body>
 </html>

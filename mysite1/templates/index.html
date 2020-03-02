@@ -349,10 +349,13 @@
         </div>
         <div class="row">
           {% for galerie in galeries %}
+         
+
           <div class="col-md-4">
             <div class="card card-blog">
               <div class="card-img">
-                <a href="/mysite1/detail/{{galerie.id}}"><img src="{{ galerie.image_set.first.image_path.url }}" alt="" class="img-fluid"></a>
+                <!--a href="/mysite1/detail/{{galerie.id}}"><img src="{{ galerie.image_set.first.image_path.url }}" alt="" class="img-fluid"></!--a -->
+                <a href="/mysite1/detail/{{galerie.id}}"><img src="{{ galerie.image_gal.url }}" alt="" class="img-fluid"></a>
               </div>
               <div class="card-body">
                 <div class="card-category-box">
@@ -374,9 +377,10 @@
               </div>
             </div>
           </div>
+          
           {% empty %}
           <h1>aucune image a afficher</h1>
-         
+          
       </div>
       {% endfor %}
     </section>
@@ -438,20 +442,20 @@
           </div>
         </div>
         <div class="row">
-          {% for galerie in galeries %}
+          {% for image in images %}
           <div class="col-md-4">
             <div class="work-box">
-              <a href="{{ galerie.image_set.first.image_path.url }}" data-lightbox="gallery-mf">
+              <a href="{{ image.image_path.url }}" data-lightbox="gallery-mf">
                 <div class="work-img">
                   
-                  <img src="{{ galerie.image_set.first.image_path.url }}" alt="{{ galerie.image_set.first.titre_img.url }}" title="" class="img-fluid">
+                  <img src="{{ image.image_path.url }}" alt="{{ image.titre_img.url }}" title="" class="img-fluid">
                 </div>
                 <div class="work-content">
                   <div class="row">
                     <div class="col-sm-8">
-                      <h2 class="w-title">{{ galerie.titre_gal }}</h2>
+                      <h2 class="w-title">{{ image.titre_img }}</h2>
                       <div class="w-more">
-                        <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
+                        <span class="w-ctegory">{{ image.titre_img}}</span> / <span class="w-date"> <time datetime="{{image.created_at| date:'Y-m-d'}}">Posté il ya {{image.created_at|timesince}}</time></span>
                        <!--! {% for img in galerie.image_set.all %}
                          <h1>{{img}}</h1>
                         {% endfor %}-->
@@ -468,6 +472,7 @@
               </a>
             </div>
           </div>
+          
           {% empty %}
           <h1>aucune image a afficher</h1>
           {% endfor %}
@@ -494,42 +499,15 @@
                     Envoyez-nous un message
                         </h5>
                       </div>
-                      <div>
-                          <form action="" method="post" role="form" class="contactForm">
-                          <div id="sendmessage">Votre message a été envoyé. Je vous remercie!</div>
-                          <div id="errormessage"></div>
-                          <div class="row">
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Veuillez saisir au moins 4 caractères" />
-                                <div class="validation"></div>
-                              </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="
-                                Veuillez saisir un e-mail valide" />
-                                <div class="validation"></div>
-                              </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Veuillez saisir au moins 8 caractères du sujet" />
-                                  <div class="validation"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                              <div class="form-group">
-                                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="S'il vous plaît écrivez quelque chose pour nous" placeholder="Message"></textarea>
-                                <div class="validation"></div>
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
+                     
+                <iframe
+                  width="450"
+                  height="380"
+                  frameborder="0" style="border:0"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBNDTttly4O0cGgt6D6uagim1mAZIEWWTw
+                    &q=cic" allowfullscreen>
+                </iframe>
+
                     </div>
                     <div class="col-md-6">
                       <div class="title-box-2 pt-4 pt-md-0">
@@ -607,7 +585,9 @@
     
       <!-- Template Main Javascript File -->
       <script src="{% static 'js/main.js' %}"></script>
-    
+      <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e57d3950ab61bb6"></script>
+
     </body>
     </html>
     
